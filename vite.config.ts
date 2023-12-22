@@ -5,4 +5,5 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	plugins: [react()],
 	base: 'react-kabzda/',
+	assetsInclude: ['/sb-preview/runtime.js'],
 })

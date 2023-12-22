@@ -1,33 +1,44 @@
+import style from './Accordion.module.scss'
+
 type AccordionProps = {
 	title: string
 	collapsed: boolean
-	setCollapsed: (value: boolean) => void
+	items: string[]
+	onChange: () => void
 }
-function Accordion({ title, collapsed, setCollapsed }: AccordionProps) {
+function Accordion({ title, items, collapsed, onChange }: AccordionProps) {
 	return (
 		<div>
-			<AccordionTitle setCollapsed={() => setCollapsed(!collapsed)} title={title} />
-			{!collapsed && <AccordionBody />}
+			<AccordionTitle onChange={onChange} title={title} />
+			{!collapsed && <AccordionBody items={items} />}
 		</div>
 	)
 }
 
 type AccordionTitleProps = {
 	title: string
-	setCollapsed: () => void
+
+	onChange: () => void
 }
 
-function AccordionTitle({ title, setCollapsed }: AccordionTitleProps) {
-	return <h3 onClick={setCollapsed}>{title}</h3>
-}
-
-function AccordionBody() {
+function AccordionTitle({ title, onChange }: AccordionTitleProps) {
 	return (
-		<ul>
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
+		<h3 className={style.title} onClick={() => onChange()}>
+			{title}
+		</h3>
+	)
+}
+
+type AccordionBodyProps = {
+	items: string[]
+}
+
+function AccordionBody({ items }: AccordionBodyProps) {
+	return (
+		<ul className={style.list}>
+			{items.map((el, i) => {
+				return <li key={i}>{el}</li>
+			})}
 		</ul>
 	)
 }

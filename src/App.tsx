@@ -1,7 +1,9 @@
+import Clock from './components/Clock/Clock'
+
 function App() {
 	return (
 		<div className='App'>
-			<PageTitle title={'Hello World'} />
+			<Clock />
 		</div>
 	)
 }
